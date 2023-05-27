@@ -42,10 +42,10 @@ function App() {
   function tokenCheck() {
     const jwt = localStorage.getItem("token")
     if (jwt) {
+      console.log(jwt)
       getContent(jwt)
         .then((res) => {
           setLoggedIn(true)
-          console.log(loggedIn)
           setEmail(res.data.email)
           navigate("/cards")
         })
@@ -57,6 +57,7 @@ function App() {
 
   // Запрс карточек и информации профиля
   useEffect(() => {
+    console.log(loggedIn)
     if (loggedIn) {
       api.getInitialCards()
         .then((res) => {
