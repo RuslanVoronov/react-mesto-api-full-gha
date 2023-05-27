@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParse = require('body-parser');
 const { errors } = require('celebrate');
 const routes = require('./routes');
+const cors = require('cors');``
 const errorHandler = require('./middlewares/errorHandler');
 
 const { PORT = 3000 } = process.env;
@@ -11,6 +12,15 @@ const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://127.0.0.1:27017/mesto');
 
 const app = express();
+
+app.use('*', cors({
+  origin: [
+    'https://praktikum.tk',
+    'http://praktikum.tk',
+    'localhost:3000'
+  ],
+  credentials: true,
+}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParse.json());
