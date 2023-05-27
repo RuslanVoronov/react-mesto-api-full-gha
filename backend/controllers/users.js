@@ -7,6 +7,7 @@ const ConflictError = require('../errors/ConflictError');
 
 const getUsers = (req, res, next) => {
   User.find().then((users) => {
+    console.log('Я в get Card')
     res.send({ data: users });
   })
     .catch(next);
