@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParse = require('body-parser');
 const { errors } = require('celebrate');
 const routes = require('./routes');
-// const cors = require('cors'); ``
+const cors = require('cors'); 
 const errorHandler = require('./middlewares/errorHandler');
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
@@ -20,24 +20,20 @@ mongoose.connect('mongodb://127.0.0.1:27017/mesto');
 const app = express();
 
 
-app.use(function (req, res, next) {
-  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
-  // проверяем, что источник запроса есть среди разрешённых 
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', "*");
-  }
+// app.use(function (req, res, next) {
+//   const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
+//   // проверяем, что источник запроса есть среди разрешённых 
+//   if (allowedCors.includes(origin)) {
+//     res.header('Access-Control-Allow-Origin', "*");
+//   }
 
-  next();
-});
+//   next();
+// });
 
-// app.use('*', cors({
-//   origin: [
-//     'https://praktikum.tk',
-//     'http://praktikum.tk',
-//     'localhost:3000'
-//   ],
-//   credentials: true,
-// }))
+app.use('*', cors({
+  origin: allowedCors,
+  credentials: true,
+}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParse.json());
