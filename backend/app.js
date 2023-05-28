@@ -21,15 +21,16 @@ mongoose.connect('mongodb://127.0.0.1:27017/mesto');
 const app = express();
 
 
-// app.use(function (req, res, next) {
-//   const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
-//   // проверяем, что источник запроса есть среди разрешённых 
-//   if (allowedCors.includes(origin)) {
-//     res.header('Access-Control-Allow-Origin', "*");
-//   }
+app.use(function (req, res, next) {
+  console.log(req.headers)
+  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
+  // проверяем, что источник запроса есть среди разрешённых 
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', "*");
+  }
 
-//   next();
-// });
+  next();
+});
 
 app.use(cors({
   origin: allowedCors
