@@ -7,11 +7,11 @@ const routes = require('./routes');
 const cors = require('cors'); 
 const errorHandler = require('./middlewares/errorHandler');
 // Массив доменов, с которых разрешены кросс-доменные запросы
-const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
-  'localhost:3000'
-];
+// const allowedCors = [
+//   'https://praktikum.tk',
+//   'http://praktikum.tk',
+//   'localhost:3000'
+// ];
 
 const { PORT = 3000 } = process.env;
 
@@ -30,10 +30,18 @@ const app = express();
 //   next();
 // });
 
-app.use('*', cors({
-  origin: allowedCors,
-  credentials: true,
-}))
+app.use(cors(
+//   {
+//   origin: allowedCors,
+//   credentials: true,
+  
+//     "origin": "*",
+//     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     "preflightContinue": false,
+//     "optionsSuccessStatus": 204
+  
+// }
+))
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParse.json());
