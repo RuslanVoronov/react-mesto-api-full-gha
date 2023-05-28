@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.mesto15.nomoredomains.rocks";
+const BASE_URL = "https://auth.nomoreparties.co";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -10,7 +10,6 @@ const checkResponse = (res) => {
 
 export const register = ({ email, password }) => {
     return fetch(`${BASE_URL}/signup`, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -22,7 +21,6 @@ export const register = ({ email, password }) => {
 
 export const authorize = ({ email, password }) => {
     return fetch(`${BASE_URL}/signin`, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -34,9 +32,7 @@ export const authorize = ({ email, password }) => {
 
 export const getContent = (token) => {
     return fetch(`${BASE_URL}/users/me`, {
-        mode: 'no-cors',
         method: 'GET',
-        cookies: token,
         headers: {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"

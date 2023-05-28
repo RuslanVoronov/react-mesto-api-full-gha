@@ -42,10 +42,10 @@ function App() {
   function tokenCheck() {
     const jwt = localStorage.getItem("token")
     if (jwt) {
-      console.log(jwt)
       getContent(jwt)
         .then((res) => {
           setLoggedIn(true)
+          console.log(loggedIn)
           setEmail(res.data.email)
           navigate("/cards")
         })
@@ -57,7 +57,6 @@ function App() {
 
   // Запрс карточек и информации профиля
   useEffect(() => {
-    console.log(loggedIn)
     if (loggedIn) {
       api.getInitialCards()
         .then((res) => {
@@ -181,7 +180,7 @@ function App() {
       });
   }
 
-  // Добавление новой карточкиО
+  // Добавление новой карточки
   function handleAddPlaceSubmit(data) {
     setIsLoading(true)
     api.addNewCard(data)
@@ -257,7 +256,7 @@ function App() {
           <EditAvatarPopup isLoading={isLoading} isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar} onClose={closeAllPopups} />
 
           <AddPlacePopup isLoading={isLoading} isOpen={isAddPlacePopupOpen} onAddPlace={handleAddPlaceSubmit} onClose={closeAllPopups} />
-          <InfoToolTip isRegisterSucces={isRegisterSucces} text={isRegisterSucces ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."} isOpen={isInfoToolTopOpened} onClose={closeAllPopups} />
+          <InfoToolTip text={isRegisterSucces ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."} isOpen={isInfoToolTopOpened} onClose={closeAllPopups} />
 
           {/*  popup question */}
           <PopupWithForm name="question" isLoading={isLoading} title="Вы уверены?" onClose={closeAllPopups} buttonText="Да" />

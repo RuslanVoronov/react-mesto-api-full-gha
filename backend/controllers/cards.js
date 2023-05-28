@@ -4,9 +4,7 @@ const ValidationError = require('../errors/ValidationError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 const getCards = (req, res, next) => Card.find({})
-  .then((cards) => {
-    console.log('Я в get Card')
-    res.status(200).send(cards)})
+  .then((cards) => res.status(200).send(cards))
   .catch(next);
 
 const createCard = (req, res, next) => {
