@@ -181,7 +181,7 @@ function App() {
       });
   }
 
-  // Добавление новой карточки
+  // Добавление новой карточкиО
   function handleAddPlaceSubmit(data) {
     setIsLoading(true)
     api.addNewCard(data)
@@ -257,7 +257,7 @@ function App() {
           <EditAvatarPopup isLoading={isLoading} isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar} onClose={closeAllPopups} />
 
           <AddPlacePopup isLoading={isLoading} isOpen={isAddPlacePopupOpen} onAddPlace={handleAddPlaceSubmit} onClose={closeAllPopups} />
-          <InfoToolTip text={isRegisterSucces ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."} isOpen={isInfoToolTopOpened} onClose={closeAllPopups} />
+          <InfoToolTip isRegisterSucces={isRegisterSucces} text={isRegisterSucces ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."} isOpen={isInfoToolTopOpened} onClose={closeAllPopups} />
 
           {/*  popup question */}
           <PopupWithForm name="question" isLoading={isLoading} title="Вы уверены?" onClose={closeAllPopups} buttonText="Да" />
