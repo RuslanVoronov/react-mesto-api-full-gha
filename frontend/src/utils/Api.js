@@ -14,6 +14,7 @@ class Api {
 
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
+            mode: 'no-cors',
             method: "GET",
             headers: this._headers
         })
@@ -22,6 +23,7 @@ class Api {
 
     updateUserInfo(data) {
         return fetch(`${this._baseUrl}/users/me`, {
+            mode: 'no-cors',
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -34,6 +36,7 @@ class Api {
 
     updateAvatar(link) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
+            mode: 'no-cors',
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -44,6 +47,7 @@ class Api {
     }
     addNewCard(data) {
         return fetch(`${this._baseUrl}/cards`, {
+            mode: 'no-cors',
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -55,6 +59,7 @@ class Api {
     }
     deleteCard(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`, {
+            mode: 'no-cors',
             method: 'DELETE',
             headers: this._headers
         })
@@ -63,6 +68,7 @@ class Api {
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
+            mode: 'no-cors',
             method: "GET",
             headers: this._headers
         })
@@ -73,6 +79,7 @@ class Api {
 
         if (!isLiked) {
             return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+                mode: 'no-cors',
                 method: "PUT",
                 headers: this._headers
             })
@@ -81,6 +88,7 @@ class Api {
 
         {
             return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+                mode: 'no-cors',
                 method: "DELETE",
                 headers: this._headers
             })
@@ -92,6 +100,7 @@ class Api {
 };
 
 const api = new Api({
+    mode: 'no-cors',
     baseUrl: 'https://api.mesto15.nomoredomains.rocks',
     headers: {
         'Accept': 'application/json',
