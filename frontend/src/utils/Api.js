@@ -14,7 +14,6 @@ class Api {
 
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
-            mode: 'no-cors',
             method: "GET",
             headers: this._headers
         })
@@ -45,7 +44,6 @@ class Api {
     }
     addNewCard(data) {
         return fetch(`${this._baseUrl}/cards`, {
-            mode: 'no-cors',
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -65,7 +63,6 @@ class Api {
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
-            mode: 'no-cors',
             method: "GET",
             headers: this._headers
         })
@@ -95,7 +92,6 @@ class Api {
 };
 
 const api = new Api({
-    mode: 'no-cors',
     baseUrl: 'https://api.mesto15.nomoredomains.rocks',
     headers: {
         'Content-Type': 'application/json'
