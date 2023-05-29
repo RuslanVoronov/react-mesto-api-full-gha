@@ -1,4 +1,4 @@
-const BASE_URL = "https://auth.nomoreparties.co";
+const BASE_URL = "https://api.mesto.nomoreparties.co/v1/cohort-55";
 // https://auth.nomoreparties.co
 const checkResponse = (res) => {
     if (res.ok) {
