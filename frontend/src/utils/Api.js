@@ -90,11 +90,12 @@ class Api {
     }
 
 };
-
+// https://mesto.nomoreparties.co/v1/cohort-55
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-55',
+    // url: 'http://localhost:3001',
+    baseUrl: 'http://localhost:3001',
     headers: {
-        authorization: '8e75bdf3-a6dd-493a-8736-dd4d2d269086',
+        authorization: localStorage.getItem('token'),
         'Content-Type': 'application/json'
     }
 });

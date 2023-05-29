@@ -45,9 +45,11 @@ const createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
   bcrypt.hash(password, 10)
-    .then((hash) => User.create({
-      name, about, avatar, email, password: hash,
-    }))
+    .then((hash) => {
+      User.create({
+        name, about, avatar, email, password: hash,
+      })
+    })
     .then((user) => res.status(201).send({
       _id: user._id,
       name: user.name,
@@ -56,7 +58,7 @@ const createUser = (req, res, next) => {
       email: user.email,
     }))
     .catch((err) => {
-      if (err.code === 11000) {
+      if (err.code === '11000') {
         next(new ConflictError('Пользователь с таким email уже существует'));
       }
       if (err.message === 'ValidationError') {
@@ -109,9 +111,15 @@ const login = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
-
-      res.cookie('token', token, { httpOnly: true });
       res.send({ token });
+      res.cookie('token', token, { httpOnly: true });
+     
+      return fetch('http://localhost:3001', {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+      })
     })
     .catch(next);
 };
