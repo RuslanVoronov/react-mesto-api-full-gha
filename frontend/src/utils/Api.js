@@ -90,10 +90,10 @@ class Api {
     }
 
 };
-// https://mesto.nomoreparties.co/v1/cohort-55
+// https://api.mesto15.nomoredomains.rocks
 const api = new Api({
     // url: 'http://localhost:3001',
-    baseUrl: 'https://api.mesto.nomoreparties.co',
+    baseUrl: 'https://api.mesto15.nomoredomains.rocks',
     headers: {
         authorization: localStorage.getItem('token'),
         'Content-Type': 'application/json'

@@ -1,5 +1,5 @@
-const BASE_URL = "https://api.mesto.nomoreparties.co";
-// https://auth.nomoreparties.co
+const BASE_URL = "https://api.mesto15.nomoredomains.rocks";
+// https://api.mesto15.nomoredomains.rocks
 const checkResponse = (res) => {
     if (res.ok) {
         return res.json();
