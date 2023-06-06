@@ -28,7 +28,7 @@ const deleteCard = (req, res, next) => {
       if (card.owner.toString() !== req.user._id) {
         throw new ForbiddenError('Удалять можно только свои карточки');
       }
-      res.send({ data: card });
+      res.send({ card });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -50,7 +50,7 @@ const likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new Error('NotValidId'))
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send({ card }))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ValidationError('Некорректный id'));
@@ -71,7 +71,7 @@ const dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new Error('NotValidId'))
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send({ card }))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ValidationError('Некорректный id'));

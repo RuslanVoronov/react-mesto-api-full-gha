@@ -7,7 +7,7 @@ const ConflictError = require('../errors/ConflictError');
 
 const getUsers = (req, res, next) => {
   User.find().then((users) => {
-    res.send({ data: users });
+    res.send({ users });
   })
     .catch(next);
 };
@@ -16,7 +16,7 @@ const getCurrentUser = (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
     .then((user) => {
-      res.send({ data: user });
+      res.send({ user });
     })
     .catch(next);
 };
@@ -26,7 +26,7 @@ const getUserById = (req, res, next) => {
   User.findById(id)
     .orFail(new Error('NotValidId'))
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -45,11 +45,9 @@ const createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
   bcrypt.hash(password, 10)
-    .then((hash) => {
-      User.create({
-        name, about, avatar, email, password: hash,
-      })
-    })
+    .then((hash) => User.create({
+      name, about, avatar, email, password: hash,
+    }))
     .then((user) => res.status(201).send({
       _id: user._id,
       name: user.name,
@@ -58,7 +56,7 @@ const createUser = (req, res, next) => {
       email: user.email,
     }))
     .catch((err) => {
-      if (err.code === '11000') {
+      if (err.code === 11000) {
         next(new ConflictError('Пользователь с таким email уже существует'));
       }
       if (err.message === 'ValidationError') {
@@ -70,6 +68,7 @@ const createUser = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
+  console.log(req.body)
   const { name, about } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
@@ -80,7 +79,7 @@ const updateUser = (req, res, next) => {
       upsert: true,
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Некорректный id'));
@@ -101,7 +100,7 @@ const updateAvatar = (req, res, next) => {
       upsert: true,
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -111,15 +110,8 @@ const login = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+      res.cookie('cookie', token, { httpOnly: true });
       res.send({ token });
-      res.cookie('token', token, { httpOnly: true });
-     
-      return fetch('http://localhost:3001', {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-      })
     })
     .catch(next);
 };

@@ -6,9 +6,6 @@ const { createUser, login } = require('../controllers/users');
 const NotFoundError = require('../errors/NotFoundError');
 const userRoutes = require('./users');
 const cardRoutes = require('./cards');
-const crashTest = require('./crach-test');
-
-router.use('/crash-test', crashTest);
 
 router.post('/signin', celebrate({
   body: Joi.object().keys({

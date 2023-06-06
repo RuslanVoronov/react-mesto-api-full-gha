@@ -38,23 +38,6 @@ function App() {
     tokenCheck();
   }, [])
 
-  // Проверка токена
-  function tokenCheck() {
-    const jwt = localStorage.getItem("token")
-    if (jwt) {
-      getContent(jwt)
-        .then((res) => {
-          setLoggedIn(true)
-          console.log(loggedIn)
-          setEmail(res.data.email)
-          navigate("/cards")
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    }
-  }
-
   // Запрс карточек и информации профиля
   useEffect(() => {
     if (loggedIn) {
@@ -89,6 +72,23 @@ function App() {
       }
     }
   }, [isOpen])
+
+    // Проверка токена
+    function tokenCheck() {
+      const jwt = localStorage.getItem("token")
+      if (jwt) {
+        getContent(jwt)
+          .then((res) => {
+            setLoggedIn(true)
+            console.log(loggedIn)
+            setEmail(res.data.email)
+            navigate("/cards")
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          });
+      }
+    }
 
   // Регистрация
   function handleRegister(value) {
@@ -256,7 +256,7 @@ function App() {
           <EditAvatarPopup isLoading={isLoading} isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar} onClose={closeAllPopups} />
 
           <AddPlacePopup isLoading={isLoading} isOpen={isAddPlacePopupOpen} onAddPlace={handleAddPlaceSubmit} onClose={closeAllPopups} />
-          <InfoToolTip isRegisterSucces={isRegisterSucces} text={isRegisterSucces ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."} isOpen={isInfoToolTopOpened} onClose={closeAllPopups} />
+          <InfoToolTip text={isRegisterSucces ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."} isOpen={isInfoToolTopOpened} onClose={closeAllPopups} />
 
           {/*  popup question */}
           <PopupWithForm name="question" isLoading={isLoading} title="Вы уверены?" onClose={closeAllPopups} buttonText="Да" />
