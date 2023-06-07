@@ -6,10 +6,11 @@ module.exports = (req, res, next) => {
   // const authorization = req.cookies.token;
   const authorization = req.headers.authorization;
   console.log(req.cookies)
+  // || !authorization.startsWith(bearer)
   if (!authorization) {
+    console.log(authorization)
     return next(new UnauthorizedError('Необходима авторизация'));
   }
-
   let payload;
 
   try {

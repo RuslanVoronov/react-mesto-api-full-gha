@@ -7,7 +7,7 @@ const ConflictError = require('../errors/ConflictError');
 
 const getUsers = (req, res, next) => {
   User.find().then((users) => {
-    res.send({ users });
+    res.send(users);
   })
     .catch(next);
 };
@@ -16,7 +16,7 @@ const getCurrentUser = (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
     .then((user) => {
-      res.send({ user });
+      res.send(user);
     })
     .catch(next);
 };

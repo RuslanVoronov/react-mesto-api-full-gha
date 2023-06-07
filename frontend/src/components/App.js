@@ -20,7 +20,7 @@ import { authorize } from '../utils/auth';
 import { register } from '../utils/auth';
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({ name: 'Загрузка' });
+  const [currentUser, setCurrentUser] = React.useState({ user: { name: 'Загрузка' } });
   const [isProfilePopupOpened, setIsEditProfilePopupOpened] = useState(false);
   const [email, setEmail] = useState("")
   const [isAddPlacePopupOpen, setIsCardPopupOpened] = useState(false);
@@ -73,22 +73,22 @@ function App() {
     }
   }, [isOpen])
 
-    // Проверка токена
-    function tokenCheck() {
-      const jwt = localStorage.getItem("token")
-      if (jwt) {
-        getContent(jwt)
-          .then((res) => {
-            setLoggedIn(true)
-            console.log(loggedIn)
-            setEmail(res.data.email)
-            navigate("/cards")
-          })
-          .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-          });
-      }
+  // Проверка токена
+  function tokenCheck() {
+    const jwt = localStorage.getItem("token")
+    if (jwt) {
+      getContent(jwt)
+        .then((res) => {
+          setLoggedIn(true)
+          console.log(loggedIn)
+          setEmail(res.data.email)
+          navigate("/cards")
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
     }
+  }
 
   // Регистрация
   function handleRegister(value) {

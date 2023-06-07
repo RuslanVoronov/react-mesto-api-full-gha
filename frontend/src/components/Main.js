@@ -5,7 +5,6 @@ import Header from './Header';
 import { Link } from 'react-router-dom';
 
 function Main(props) {
-
     const currentUser = React.useContext(CurrentUserContext);
     function removeToken() {
         localStorage.removeItem("token")
@@ -23,12 +22,12 @@ function Main(props) {
                 <section className="profile">
                     <div className="profile__content">
                         <div className="profile__avatar">
-                            <img src={currentUser.user.avatar} alt="Аватар" className="profile__avatar-image" />
+                            <img src={currentUser.avatar} alt="Аватар" className="profile__avatar-image" />
                             <div onClick={props.onEditAvatar} className="profile__avatar-overlay"></div>
                         </div>
                         <div className="profile-info">
-                            <h1 className="profile-info__title">{currentUser.user.name}</h1>
-                            <p className="profile-info__subtitle">{currentUser.user.about}</p>
+                            <h1 className="profile-info__title">{currentUser.name}</h1>
+                            <p className="profile-info__subtitle">{currentUser.about}</p>
                             <button onClick={props.onEditProfile} className="profile-info__edit-button" type="button"></button>
                         </div>
                     </div>
@@ -39,7 +38,6 @@ function Main(props) {
                 <section className="elements">
                     {
                         props.cards.map((card) => {
-                            console.log(card._id)
                             return (
                                 <Card
                                     cardInfo={card}
