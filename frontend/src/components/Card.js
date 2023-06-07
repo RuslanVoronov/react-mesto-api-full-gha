@@ -19,7 +19,6 @@ function Card({ cardInfo, onCardClick, onCardLike, onCardDelete }) {
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
     const isLiked = cardInfo.likes.some(i => i._id === currentUser._id);
-
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = (
         `like__button ${isLiked && 'like__button_active'}`
