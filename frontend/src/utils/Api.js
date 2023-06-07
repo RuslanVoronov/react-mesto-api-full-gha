@@ -90,9 +90,9 @@ class Api {
     }
 
 };
-
+// https://api.mesto15.nomoredomains.rocks
 const api = new Api({
-    baseUrl: 'https://api.mesto15.nomoredomains.rocks',
+    baseUrl: 'http://localhost:3001',
     headers: {
         authorization: localStorage.getItem('token'),
         'Content-Type': 'application/json'

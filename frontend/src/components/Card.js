@@ -18,12 +18,11 @@ function Card({ cardInfo, onCardClick, onCardLike, onCardDelete }) {
     const isOwn = cardInfo.owner === currentUser._id;
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = cardInfo.likes.some(i => i._id === currentUser._id);
+    const isLiked = cardInfo.likes.some(i => i === currentUser._id);
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = (
         `like__button ${isLiked && 'like__button_active'}`
-    );;
-
+    );
 
     {/*  elements template */ }
     return (<div className="element">
