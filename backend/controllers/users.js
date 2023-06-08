@@ -111,6 +111,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
       res.cookie('cookie', token, { httpOnly: true });
+      console.log('создаю куки')
       res.send({ token });
     })
     .catch(next);
