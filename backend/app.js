@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParse = require('body-parser');
 const { errors } = require('celebrate');
 const routes = require('./routes');
+const { requestLogger, errorLogger } = require('./middlewares/log');
 const errorHandler = require('./middlewares/errorHandler');
 const cors = require('cors');
 
@@ -33,6 +34,8 @@ app.use(cors({
   credentials: true,
 }))
 app.use(routes);
+app.use(requestLogger)
+app.use(errorLogger)
 app.use(errors());
 app.use(errorHandler);
 
