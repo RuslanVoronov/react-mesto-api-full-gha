@@ -33,8 +33,14 @@ app.use(cors({
   origin: allowedCors,
   credentials: true,
 }))
-app.use(routes);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use(requestLogger)
+app.use(routes);
 app.use(errorLogger)
 app.use(errors());
 app.use(errorHandler);
