@@ -101,7 +101,7 @@ class Api {
 // https://api.mesto15.nomoredomains.rocks
 const api = new Api({
     credentials: "include",
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'https://api.mesto15.nomoredomains.rocks',
     headers: {
         authorization: localStorage.getItem('token'),
         'Content-Type': 'application/json'
