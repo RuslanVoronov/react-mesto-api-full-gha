@@ -7,7 +7,7 @@ const routes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const cors = require('cors');
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 
 const allowedCors = [
   'https://mesto15.nomoredomains.rocks',
