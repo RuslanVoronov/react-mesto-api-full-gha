@@ -34,6 +34,19 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
 
+  // useEffect(() => {
+  //   loggedIn && Promise.all([api.getUserInfo(), api.getInitialCards()])
+  //     .then(([userData, cardData]) => {
+  //       setCurrentUser(userData);
+  //       setEmail(userData.email);
+  //       setCards(cardData);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // },
+  //   [loggedIn])
+
   useEffect(() => {
     tokenCheck();
   }, [])
