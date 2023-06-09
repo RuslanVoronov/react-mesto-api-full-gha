@@ -24,16 +24,13 @@ const getCurrentUser = (req, res, next) => {
 const getUserById = (req, res, next) => {
   const { id } = req.params;
   User.findById(id)
-    .orFail(new Error('NotValidId'))
+    .orFail(() => new NotFoundError('Пользователь с указанным id не существует'))
     .then((user) => {
       res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ValidationError('Некорректный id'));
-      }
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Пользователь не найден'));
       } else {
         next(err);
       }
@@ -58,8 +55,7 @@ const createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         next(new ConflictError('Пользователь с таким email уже существует'));
-      }
-      if (err.message === 'ValidationError') {
+      } else if (err.message === 'ValidationError') {
         next(new ValidationError('Некорректный id'));
       } else {
         next(err);
@@ -68,7 +64,6 @@ const createUser = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
-  console.log(req.body)
   const { name, about } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
@@ -76,7 +71,6 @@ const updateUser = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-      upsert: true,
     },
   )
     .then((user) => res.send(user))
@@ -97,7 +91,6 @@ const updateAvatar = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-      upsert: true,
     },
   )
     .then((user) => res.send(user))
@@ -111,7 +104,6 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
       res.cookie('cookie', token, { httpOnly: true });
-      console.log('создаю куки')
       res.send({ token });
     })
     .catch(next);

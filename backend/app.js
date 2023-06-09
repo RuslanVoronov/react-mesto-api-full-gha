@@ -1,12 +1,11 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
 const bodyParse = require('body-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/log');
 const errorHandler = require('./middlewares/errorHandler');
-const cors = require('cors');
 
 const { PORT = 3000 } = process.env;
 
@@ -27,21 +26,20 @@ app.options('*', cors({
   origin: allowedCors,
   credentials: true,
 }));
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParse.json());
 app.use(cors({
   origin: allowedCors,
   credentials: true,
-}))
+}));
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 
-app.use(requestLogger)
+app.use(requestLogger);
 app.use(routes);
-app.use(errorLogger)
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 

@@ -70,14 +70,12 @@ const dislikeCard = (req, res, next) => {
     { $pull: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(new Error('NotValidId'))
+    .orFail(() => new NotFoundError('Несуществующий в БД id карточки'))
+
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ValidationError('Некорректный id'));
-      }
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Несуществующий в БД id карточки'));
       } else {
         next(err);
       }

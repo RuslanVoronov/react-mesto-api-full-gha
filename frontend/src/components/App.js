@@ -113,6 +113,7 @@ function App() {
       }
       )
       .catch((err) => {
+        setIsInfoToolTopOpened(!isInfoToolTopOpened);
         console.log(`Ошибка: ${err}`)
       })
   }
