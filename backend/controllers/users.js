@@ -12,6 +12,8 @@ const getUsers = (req, res, next) => {
     .catch(next);
 };
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const getCurrentUser = (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
@@ -102,7 +104,7 @@ const login = (req, res, next) => {
 
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
       res.cookie('cookie', token, { httpOnly: true });
       res.send({ token });
     })
