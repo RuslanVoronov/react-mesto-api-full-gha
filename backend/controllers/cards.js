@@ -22,20 +22,19 @@ const createCard = (req, res, next) => {
 
 const deleteCard = (req, res, next) => {
   const id = req.params.cardid;
-  Card.findByIdAndRemove(id)
-    .orFail(new Error('NotValidId'))
+  Card.findById(id)
+    .orFail(() => new NotFoundError('Несуществующий в БД id карточки'))
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
         throw new ForbiddenError('Удалять можно только свои карточки');
       }
-      res.send(card);
+      Card.deleteOne()
+        .then(() => res.send({ message: 'Карточка удалена' }))
+        .catch(next);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ValidationError('Некорректный id'));
-      }
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Несуществующий в БД id карточки'));
       } else {
         next(err);
       }
@@ -49,14 +48,11 @@ const likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(new Error('NotValidId'))
+    .orFail(() => new NotFoundError('Несуществующий в БД id карточки'))
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ValidationError('Некорректный id'));
-      }
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Несуществующий в БД id карточки'));
       } else {
         next(err);
       }
