@@ -1,15 +1,42 @@
-[![Tests](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml/badge.svg)](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml)
-# react-mesto-api-full
-Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. Бэкенд расположите в директории `backend/`, а фронтенд - в `frontend/`. 
-  
-Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
+![image](https://github.com/RuslanVoronov/mesto/assets/102999328/eef5f601-e570-4982-a83e-8dbf230ef8d0)
 
-Адрес репозитория: https://github.com/RuslanVoronov/react-mesto-api-full-gha
+# Проект: Место 
+## О проекте
+Интерактивная веб-страница, позволяющая пользователю редактировать профиль и аватар, добавить новую карточку с фотографией и описанием места, удалить свои карточки, ставить и удалять на своих карточках и карточках других пользователей. Все изменения сохраняются на сервере Яндекс.Практикума.
+## Технологический стек и функциональность:
+### HTML
+- Семантические теги
+### CSS
+- Flexbox
+- Grid Layout
+- Адаптивная верстка с использованием медиа-запросов
+- Позиционирование блоков и элементов
+- Минификация CSS и автоматическое добавление вендорных префиксов
+- БЭМ Nested
+- Псевдоклассы CSS
+### JavaScript
+- Модульные окна с формой
+- «Живая» валидация форм
+- ES6-классы
+- ООП
+- Асинхронный код: промисы и HTTP-запросы
+- Минификация и транспиляция JS Babel
+- API сервера Яндекс.Практикум
+- Webpack
 
-## Ссылки на проект
+## Ссылки на проект и на макет:
+* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-IP 51.250.77.24
+* [Ссылка на GitHub Pages](https://ruslanvoronov.github.io/mesto)
 
-Frontend https://mesto15.nomoredomains.rocks
+## Другие репозитории проекта Mesto
 
-Backend https://api.mesto15.nomoredomains.rocks
+* [Верстка основного контента и реализация функционала главной страницы.](https://github.com/RuslanVoronov/mesto) 
+
+* [Портирование на React.js](https://github.com/RuslanVoronov/mesto-react)
+ 
+* [Добавление функционала регистрации и авторизации пользователя.](https://github.com/RuslanVoronov/react-mesto-auth)
+
+* [Создание собственного бекенда.](https://github.com/RuslanVoronov/express-mesto-gha)
+
+* Фронтенд и бекенд. Деплой на публичный сервер. ⬅ текущий репозиторий
